@@ -3,8 +3,8 @@ import './index.css';
 
 function Transposition() {
   const [key] = useState([3, 1, 2]);
-  const [originalText] = useState('trick-hat');
-  const [cipherText] = useState('hat-trick');
+  const [originalText] = useState('hat trick');
+  const [cipherText] = useState('trkh*iatc');
   const [userGuess, setUserGuess] = useState('');
   const [feedback, setFeedback] = useState('');
   const [showHint, setShowHint] = useState(false);
@@ -27,20 +27,26 @@ function Transposition() {
     <div className="transposition-container">
       <h2>Transposition Cipher Decryption Challenge</h2>
       <div className="cipher-column-display">
-        {key.map((colNum, index) => (
-          <div key={index} className="column-header">{colNum}</div>
+      {[...Array(key.length)].map((_, index) => (
+        <div key={index} className="column-header">{index + 1}</div>
+      ))}
+      <div className="columns-container">
+        {[0, 1, 2].map(colIndex => (
+          <div key={colIndex} className="column">
+            {[0, 1, 2].map(rowIndex => (
+              <div key={rowIndex} className="column-cell">
+                <input
+                  type="text"
+                  maxLength={1} // Restricts input to one character
+                  className="cell-input"
+                  onInput={(e) => e.target.value = e.target.value.slice(0, 1)} // Ensures single character input
+                />
+              </div>
+            ))}
+          </div>
         ))}
-        <div className="columns-container">
-          {[0, 1, 2].map(colIndex => (
-            <div key={colIndex} className="column">
-              {[0, 1, 2].map(rowIndex => (
-                <div key={rowIndex} className="column-cell">
-                  {/* Empty cells */}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+      </div>
+
       </div>
       <div className="cipher-info">
         <p>Cipher Text: {cipherText}</p>
