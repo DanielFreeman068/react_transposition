@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import './index.css';
+import React, { useState } from 'react';
 
 function Transposition() {
   const [key] = useState([3, 1, 2]);
