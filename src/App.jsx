@@ -51,6 +51,7 @@ function App() {
             </header>
             <div className="landing-container">
                 <main>
+                    {/* form with validation functions tied to it */}
                     <p className="landing-intro-text">Welcome to the Cipher League! Please enter your three character username to begin.</p>
                     <form onSubmit={handleSubmit}>
                         <div className="input-group">
