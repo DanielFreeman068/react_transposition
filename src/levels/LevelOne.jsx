@@ -25,13 +25,10 @@ function LevelOne() {
     setShowHint(true);
   };
 
-  const handleQuit = () => {
-    setQuitBox(true);
-  }
 
   return (
     <>
-      <button onClick={()=> handleQuit} className="back-button">Quit</button>
+      <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
       <Timer/>
       {quitBox && <h1>CODE THIS LATER</h1>}
       <div className="transposition-container">
