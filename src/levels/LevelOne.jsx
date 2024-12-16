@@ -1,53 +1,30 @@
 import React, { useState, useRef } from 'react';
 import Timer from '../components/Timer'
 import ProgressBar from '../components/Progress';
+import words from '../data/words'
 
 function LevelOne() {
   //level one word options
-  const LevelOneWords = [
-    {
-      originalText: "ball kick",
-      cipherText: "a*clkkbli",
-      cipherKey: [2, 3, 1],
-      hint: "A move in soccer where a player strikes the ball with their foot."
-    },
-    {
-      originalText: "goal save",
-      cipherText: "glaaseo*v",
-      cipherKey: [1, 3, 2],
-      hint: "A defensive action where the goalkeeper prevents the ball from entering the net."
-    },
-    {
-      originalText: "free kick",
-      cipherText: "ekkr*cfei",
-      cipherKey: [3, 2, 1],
-      hint: "A set-piece awarded for a foul, where the ball is kicked from a stationary position."
-    },
-    {
-      originalText: "hat trick",
-      cipherText: "trkh*iatc",
-      cipherKey: [3, 1, 2],
-      hint: "In soccer, scoring three goals in one game earns you something magical, like pulling rabbits out of a hat."
-    }
-  ];
+  const LevelWords = words.levelOne;
+  //array helping with dupes
   const selectedWords = useRef([]);
   //array for clearing all text boxes
   const inputsRef = useRef([]);
   
     //function to grab random word and make sure its not a dupe
     const getRandomWord = () => {
-      if (selectedWords.current.length >= LevelOneWords.length) {
+      if (selectedWords.current.length >= LevelWords.length) {
         selectedWords.current = [];
       }
   
       let availableWordIndex;
       do {
-        availableWordIndex = Math.floor(Math.random() * LevelOneWords.length);
+        availableWordIndex = Math.floor(Math.random() * LevelWords.length);
       } while (selectedWords.current.includes(availableWordIndex));
   
       selectedWords.current.push(availableWordIndex);
   
-      return LevelOneWords[availableWordIndex];
+      return LevelWords[availableWordIndex];
     }
   
   // Example: Pick a random word object
@@ -111,10 +88,10 @@ function LevelOne() {
       {/* end screen */}
       {!isRunning && (<div className='end-screen-container'>
         <h1>Level Completed!</h1>
-        <div className="star-group">
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
-          <i className="fas fa-star"></i>
+        <div className="end-star-group">
+          <i id='end-star' className="fas fa-star"></i>
+          <i id='end-star' className="fas fa-star"></i>
+          <i id='end-star' className="fas fa-star"></i>
         </div>
         <a href="/levels" className="end-button">Finish</a>
       </div>)}
@@ -122,12 +99,13 @@ function LevelOne() {
       <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
       <Timer isRunning={isRunning} addedTime={hintTime}/>
       {quitBox && (<div className='quit-container'>
+        <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
         <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
         <a className="quit-button" href="/menu">Back</a>
       </div>)}
       <div className="transposition-container">
         <header>
-          <h1>Hard</h1>
+          <h1>Easy</h1>
         </header>
         {/* progress bar component */}
         <ProgressBar progress={progress} progressFiller={progressFiller}/>
