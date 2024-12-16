@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ levelActive }) => {
+const Timer = ({ addedTime, isRunning }) => {
 const [time, setTime] = useState(0);
-const [isRunning, setIsRunning] = useState(true);
 
 // timer logic stuff
 useEffect(() => {
     let interval;
     if (isRunning) {
-    interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 10);
-    }, 10); 
+        interval = setInterval(() => {
+            setTime((prevTime) => prevTime + 10);
+        }, 10); 
     } else {
-    clearInterval(interval);
+        clearInterval(interval);
     }
     return () => clearInterval(interval);
 }, [isRunning]);
@@ -27,7 +26,7 @@ const formatTime = (milliseconds) => {
 
 return (
     <div>
-    <h3 className="timer">Timer: {formatTime(time)}</h3>
+        <h3 className="timer">Timer: {formatTime(time + addedTime)}</h3>
     </div>
 );
 };

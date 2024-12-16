@@ -1,81 +1,173 @@
-import React, { use, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Timer from '../components/Timer'
-import { HiH1 } from 'react-icons/hi2';
+import ProgressBar from '../components/Progress';
 
 function LevelOne() {
-  const [key] = useState([3, 1, 2]);
-  const [originalText] = useState('hat trick');
-  const [cipherText] = useState('trkhXiatc');
+  //level one word options
+  const LevelOneWords = [
+    {
+      originalText: "ball kick",
+      cipherText: "a*clkkbli",
+      cipherKey: [2, 3, 1],
+      hint: "A move in soccer where a player strikes the ball with their foot."
+    },
+    {
+      originalText: "goal save",
+      cipherText: "glaaseo*v",
+      cipherKey: [1, 3, 2],
+      hint: "A defensive action where the goalkeeper prevents the ball from entering the net."
+    },
+    {
+      originalText: "free kick",
+      cipherText: "ekkr*cfei",
+      cipherKey: [3, 2, 1],
+      hint: "A set-piece awarded for a foul, where the ball is kicked from a stationary position."
+    },
+    {
+      originalText: "hat trick",
+      cipherText: "trkh*iatc",
+      cipherKey: [3, 1, 2],
+      hint: "In soccer, scoring three goals in one game earns you something magical, like pulling rabbits out of a hat."
+    }
+  ];
+  const selectedWords = useRef([]);
+  //array for clearing all text boxes
+  const inputsRef = useRef([]);
+  
+    //function to grab random word and make sure its not a dupe
+    const getRandomWord = () => {
+      if (selectedWords.current.length >= LevelOneWords.length) {
+        selectedWords.current = [];
+      }
+  
+      let availableWordIndex;
+      do {
+        availableWordIndex = Math.floor(Math.random() * LevelOneWords.length);
+      } while (selectedWords.current.includes(availableWordIndex));
+  
+      selectedWords.current.push(availableWordIndex);
+  
+      return LevelOneWords[availableWordIndex];
+    }
+  
+  // Example: Pick a random word object
+  let randomCipher = getRandomWord();
+
+  const [hint, setHint] = useState(randomCipher.hint)
+  const [key, setKey] = useState(randomCipher.cipherKey);
+  const [originalText, setOriginalText] = useState(randomCipher.originalText);
+  const [cipherText, setCipherText] = useState(randomCipher.cipherText);
   const [userGuess, setUserGuess] = useState('');
   const [feedback, setFeedback] = useState('');
-  const [showHint, setShowHint] = useState(false);
   const [quitBox, setQuitBox] = useState(false)
+  const [progress, setProgress] = useState(0);
+  const [progressFiller, setProgressFiller] = useState(0);
+  const [hintTime, setHintTime] = useState(0);
+  const [currentPuzzleCount, setCurrentPuzzleCount] = useState(0);
+  const [isRunning, setIsRunning] = useState(true);
+
+  //function to deal with pulling new words for the other levels
+  const manageLevel = (count) => {
+    setProgress(prev => prev + 188);
+    setProgressFiller(prev => prev + 36);
+    if(count < 2){
+      randomCipher = getRandomWord();
+      setCipherText(randomCipher.cipherText);
+      setOriginalText(randomCipher.originalText);
+      setKey(randomCipher.cipherKey);
+      setHint(randomCipher.hint);
+      clearInputs();
+    } else {
+      setIsRunning(false);
+    }
+  }
 
   // Check the user's guess
   const handleGuess = () => {
     if (userGuess.toLowerCase().trim() === originalText.toLowerCase()) {
+      setCurrentPuzzleCount(prev => prev + 1)
       setFeedback('Congratulations! You cracked the code!');
+      manageLevel(currentPuzzleCount)
     } else {
       setFeedback('Incorrect. Try again!');
     }
   };
 
   // Provide a hint
-  const handleHint = () => {
-    setShowHint(true);
+  const handleHint = (addedTime) => {
+    alert(hint);
+    setHintTime(addedTime);
   };
 
+  // Function to clear all inputs
+  const clearInputs = () => {
+    inputsRef.current.forEach(input => {
+      input.value = '';
+    });
+  };
 
   return (
     <>
+      {/* end screen */}
+      {!isRunning && (<div className='end-screen-container'>
+        <h1>Level Completed!</h1>
+        <div className="star-group">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+        </div>
+        <a href="/levels" className="end-button">Finish</a>
+      </div>)}
+      {/* quit and timer component in top corners */}
       <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
-      <Timer/>
-      {quitBox && <h1>CODE THIS LATER</h1>}
+      <Timer isRunning={isRunning} addedTime={hintTime}/>
+      {quitBox && (<div className='quit-container'>
+        <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
+        <a className="quit-button" href="/menu">Back</a>
+      </div>)}
       <div className="transposition-container">
-        <h2>Transposition Cipher Decryption Challenge</h2>
+        <header>
+          <h1>Hard</h1>
+        </header>
+        {/* progress bar component */}
+        <ProgressBar progress={progress} progressFiller={progressFiller}/>
         <div className="cipher-column-display">
         {[...Array(key.length)].map((_, index) => (
           <div key={index} className="column-header">{index + 1}</div>
         ))}
-        <div className="columns-container">
-          {[0, 1, 2].map(colIndex => (
-            <div key={colIndex} className="column">
-              {[0, 1, 2].map(rowIndex => (
-                <div key={rowIndex} className="column-cell">
-                  <input
-                    type="text"
-                    maxLength={1} // Restricts input to one character
-                    className="cell-input"
-                    onInput={(e) => e.target.value = e.target.value.slice(0, 1)} // Ensures single character input
-                  />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+          <div className="columns-container">
+            {/* creates needed columns for user interaction */}
+            {[0, 1, 2].map(colIndex => (
+              <div key={colIndex} className="column">
+                {[0, 1, 2].map(rowIndex => (
+                  <div key={rowIndex} className="column-cell">
+                    <input type="text" maxLength={1} className="cell-input" onInput={(e) => e.target.value = e.target.value.slice(0, 1)} ref={(el) => el && inputsRef.current.push(el)}/>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="cipher-info">
-          <p>Cipher Text: {cipherText}</p>
-          <p>Key: {key.join('')}</p>
+          {/* displays info for user */}
+          <p>Cipher Text: {cipherText.toUpperCase()}</p>
+          <p>Key: {key.join(' ')}</p>
+          {/* guessingg input and submit section */}
           <div className="guess-section">
-            <input 
-              type="text" 
-              value={userGuess}
-              onChange={(e) => setUserGuess(e.target.value)}
-              placeholder="Enter the original text"
-              className="guess-input"
-            />
-            <button onClick={handleGuess}>Submit Guess</button>
-            <button onClick={handleHint}>Get Hint</button>
-          </div>
-          {feedback && <p className="feedback">{feedback}</p>}
-          {showHint && (
-            <div className="hint">
-              <p>Hint: This is a column transposition cipher</p>
-              <p>The key {key.join('')} rearranges the columns</p>
-              <p>You need to figure out the original text that, when rearranged, creates the cipher text</p>
+            <div className="input-container">
+              <input
+                type="text"
+                value={userGuess}
+                onChange={(e) => setUserGuess(e.target.value)}
+                placeholder="Enter the original text"
+                className="guess-input"
+              />
+              <button onClick={handleGuess} className="submit-button">Submit</button>
             </div>
-          )}
+          </div>
+          {/* hint button and feedback */}
+          <button className='hint' onClick={()=>handleHint(prev => prev + 30000)}>Get Hint</button>
+          {feedback && <p className="feedback">{feedback}</p>}
         </div>
       </div>
     </>
