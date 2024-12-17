@@ -101,7 +101,7 @@ const handleGuess = () => {
         {quitBox && (<div className='quit-container'>
             <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
             <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
-            <a className="quit-button" href="/menu">Back</a>
+            <a className="quit-button" href="/menu">Confirm</a>
         </div>)}
         <div className="transposition-container">
             <header>
