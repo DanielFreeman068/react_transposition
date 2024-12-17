@@ -154,13 +154,48 @@ const words = {
     ],
 
     levelFour: [
-        //fix this one later
         {
             originalText: "midfielder",
             cipherText: "mfidl*ree",
             cipherKey: [3, 1, 2],
             hint: "A player who plays both defensive and attacking roles in the middle of the field."
-        },    
+        },
+        {
+            originalText: "goalkeeper",
+            cipherText: "okp*gleraee*",
+            cipherKey: [2, 1, 3],
+            hint: "The player responsible for guarding the goal and preventing the opposing team from scoring."
+        },   
+        {
+            originalText: "substitution",
+            cipherText: "sstibitnutuo",
+            cipherKey: [1, 3, 2],
+            hint: "Replacing one player with another during a match."
+        },
+        {
+            originalText: "clearance",
+            cipherText: "lrc*can*eae*",
+            cipherKey: [2, 1, 3],
+            hint: "A defensive action where the ball is kicked away from the goal area."
+        },
+        {
+            originalText: "lionel messi",
+            cipherText: "oleiiemsln*s",
+            cipherKey: [3, 2, 1],
+            hint: "The greatest player of all time..."
+        },
+        {
+            originalText: "la remontada",
+            cipherText: "aendlroa*mta",
+            cipherKey: [2, 1, 3],
+            hint: "Barcelona's 6-1 comeback against Paris Saint Germain in 2017",
+        },
+        {
+            originalText: "golden ball",
+            cipherText: "gd*llna*oebl",
+            cipherKey: [1, 3, 2],
+            hint: "An annual football award presented by French magazine France Football since 1956 to honour the player deemed to have performed the best over the previous season",
+        },
     ]
 };
 
