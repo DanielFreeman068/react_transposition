@@ -1,20 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-const Timer = ({ addedTime, isRunning }) => {
+const Timer = ({ addedTime, isRunning, level, onLevelComplete }) => {
 const [time, setTime] = useState(0);
 
-// timer logic stuff
+// Timer logic
 useEffect(() => {
     let interval;
     if (isRunning) {
-        interval = setInterval(() => {
-            setTime((prevTime) => prevTime + 10);
-        }, 10); 
+    interval = setInterval(() => {
+        setTime((prevTime) => {
+        let newTime = prevTime + 10;
+        if (level === 'one') {
+            localStorage.setItem("oneTime", newTime);
+        } else if (level === 'two') {
+            localStorage.setItem("twoTime", newTime);
+        } else if (level === 'three') {
+            localStorage.setItem("threeTime", newTime);
+        } else if (level === 'four') {
+            localStorage.setItem("fourTime", newTime);
+        }
+        return newTime;
+        });
+    }, 10);
     } else {
-        clearInterval(interval);
+    clearInterval(interval);
+    if (onLevelComplete) {
+        // Call the function to post data once the level is complete
+        onLevelComplete(level, time);
+    }
     }
     return () => clearInterval(interval);
-}, [isRunning]);
+}, [isRunning, level, time, onLevelComplete]);
 
 // Format time into mm:ss:SS
 const formatTime = (milliseconds) => {
@@ -26,7 +42,7 @@ const formatTime = (milliseconds) => {
 
 return (
     <div>
-        <h3 className="timer">Timer: {formatTime(time + addedTime)}</h3>
+    <h3 className="timer">Timer: {formatTime(time + addedTime)}</h3>
     </div>
 );
 };

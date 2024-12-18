@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
-    name: {
-        type:String,
-        maxLength:[20, "The name cannot exceed 20 characters"]
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        uppercase: true
     },
     id:{
-        type:Date
-    },
-    email:{
-        type:String
+        type:Date,
+        required: true
     }
 }, {collection: "users"})
 

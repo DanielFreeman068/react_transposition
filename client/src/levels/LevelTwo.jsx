@@ -97,7 +97,7 @@ const handleGuess = () => {
         </div>)}
         {/* quit and timer component in top corners */}
         <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
-        <Timer isRunning={isRunning} addedTime={hintTime}/>
+        <Timer isRunning={isRunning} addedTime={hintTime} level={'two'}/>
         {quitBox && (<div className='quit-container'>
             <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
             <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>

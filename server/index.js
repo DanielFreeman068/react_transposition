@@ -1,10 +1,9 @@
-const { MongoClient } = require("mongodb");
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const morgan = require('morgan')
 require("dotenv").config();
-const userRoute = require("./routes/userController");
+const transpositionRoute = require("./routes/controllerRouter");
 const connectDB = require("./db/connect");
 const port = 5000
 
@@ -20,13 +19,13 @@ app.use(express.urlencoded({extended : false}));
 // CheckPath
 app.get('/',(req,res)=>{
     res.send('Server is Working')
-    //Use this to check to make sure the server is working by going to http://localhost/5000
-    //If you see App is working that means the backend server is working
 })
 
 //Routes
-app.use("/users", userRoute);
+app.use("/users", transpositionRoute);
+app.use("/scores", transpositionRoute);
 
+//run server
 const initServer = async() => {
     try {
         await connectDB("mongodb+srv://mongo-template-user:TJGx0Jlpwr2qEqVX@task-manager-practice.ixadl.mongodb.net/Cipher-league?retryWrites=true&w=majority");

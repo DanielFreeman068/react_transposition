@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const existingUsernames = new Set();
+const bannedUsernames = ["SEX", "ASS", "FAG"];
 
 function App() {
     const [username, setUsername] = useState('');
@@ -27,20 +27,31 @@ function App() {
             return false;
         }
 
-        if (existingUsernames.has(username)) {
-            setError('Username already exists');
+        if (bannedUsernames.some(badWord => username.toUpperCase().includes(badWord))) {
+            setError('Username contains inappropriate words');
             return false;
         }
 
-        existingUsernames.add(username);
         return true;
     };
 
     //when form is submitted it checks the username and if it checks out it sends user to menu
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (validateUsername()) {
-            navigate('/menu');
+            let result = await fetch('http://localhost:5000/users/',{
+                method: 'post',
+                body: JSON.stringify({username, id:Date.now()}),
+                headers:{'Content-Type': 'application/json'}
+            })
+            result = await result.json()
+            if(result.success){
+                console.log(username);
+                localStorage.setItem("username", username);
+                navigate('/menu');
+            } else {
+                alert(result.msg);
+            }
         }
     };
     

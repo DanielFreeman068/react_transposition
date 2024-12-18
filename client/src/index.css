@@ -269,12 +269,40 @@ header h1{
   flex-wrap: wrap;
 }
 
-.level {
+.level-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1 1 calc(25% - 40px);
   max-width: calc(25% - 40px);
+}
+
+.level-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 calc(25% - 40px);
+  max-width: calc(25% - 40px);
+}
+
+.level-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 calc(25% - 40px);
+  max-width: calc(25% - 40px);
+}
+
+.level-4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 calc(25% - 40px);
+  max-width: calc(25% - 40px);
+}
+
+.level-button.level-green {
+  background-color: #4DD456;
 }
 
 .star-group {
@@ -284,9 +312,12 @@ header h1{
 }
 
 .star-group i {
-  /* color: gold; */
   color: black;
   margin: 0 4px;
+}
+
+.star-group i.gold {
+  color: gold;
 }
 
 .level-button {

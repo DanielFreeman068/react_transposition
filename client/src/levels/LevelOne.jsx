@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Timer from '../components/Timer'
 import ProgressBar from '../components/Progress';
 import words from '../data/words'
@@ -30,6 +30,7 @@ function LevelOne() {
   // Example: Pick a random word object
   let randomCipher = getRandomWord();
 
+  const [score, setScore] = useState(0)
   const [hint, setHint] = useState(randomCipher.hint)
   const [key, setKey] = useState(randomCipher.cipherKey);
   const [originalText, setOriginalText] = useState(randomCipher.originalText);
@@ -42,9 +43,10 @@ function LevelOne() {
   const [hintTime, setHintTime] = useState(0);
   const [currentPuzzleCount, setCurrentPuzzleCount] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
+  const [level, setLevel] = useState('one');
 
   //function to deal with pulling new words for the other levels
-  const manageLevel = (count) => {
+  const manageLevel = async(count) => {
     setProgress(prev => prev + 188);
     setProgressFiller(prev => prev + 36);
     if(count < 2){
@@ -56,8 +58,57 @@ function LevelOne() {
       clearInputs();
     } else {
       setIsRunning(false);
+      // let result = await fetch('http://localhost:5000/users',{
+      //   method: 'post',
+      //   body: JSON.stringify({username, id:Date.now()}),
+      //   headers:{'Content-Type': 'application/json'}
+      // })
+      // result = await result.json()
+      // if(result.success){
+      //     navigate('/menu');
+      // } else {
+      //     alert(result.msg);
+      // }
     }
   }
+
+  const handleLevelComplete = async (level, time) => {
+    const user = localStorage.getItem('username'); // Assuming username is saved in localStorage
+    
+    const data = {
+      level: level,
+      time: time,
+      username: user,
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/scores', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.success) {
+        console.log('Level completion data saved successfully');
+      } else {
+        console.error('Failed to save level completion data');
+      }
+    } catch (error) {
+      console.error('Error during request', error);
+    }
+  };
+
+
+
+//THIS DOES NOT WORK IT ALWAYS PULLS THE SCORE FROM BEFORE
+  useEffect(() => {
+      const savedTime = localStorage.getItem('oneTime');
+      if (savedTime) {
+          setScore(parseInt(savedTime));
+      }
+  }, []);
 
   // Check the user's guess
   const handleGuess = () => {
@@ -88,6 +139,7 @@ function LevelOne() {
       {/* end screen */}
       {!isRunning && (<div className='end-screen-container'>
         <h1>Level Completed!</h1>
+        <h3>{score}</h3>
         <div className="end-star-group">
           <i id='end-star' className="fas fa-star"></i>
           <i id='end-star' className="fas fa-star"></i>
@@ -97,7 +149,7 @@ function LevelOne() {
       </div>)}
       {/* quit and timer component in top corners */}
       <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
-      <Timer isRunning={isRunning} addedTime={hintTime}/>
+      <Timer isRunning={isRunning} addedTime={hintTime} level={level} onLevelComplete={handleLevelComplete}/>
       {quitBox && (<div className='quit-container'>
         <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
         <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
