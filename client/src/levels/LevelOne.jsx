@@ -30,8 +30,9 @@ function LevelOne() {
   // Example: Pick a random word object
   let randomCipher = getRandomWord();
 
-  const [score, setScore] = useState(0)
-  const [hint, setHint] = useState(randomCipher.hint)
+  const username = localStorage.getItem('username');
+  const [score, setScore] = useState(0);
+  const [hint, setHint] = useState(randomCipher.hint);
   const [key, setKey] = useState(randomCipher.cipherKey);
   const [originalText, setOriginalText] = useState(randomCipher.originalText);
   const [cipherText, setCipherText] = useState(randomCipher.cipherText);
@@ -43,7 +44,7 @@ function LevelOne() {
   const [hintTime, setHintTime] = useState(0);
   const [currentPuzzleCount, setCurrentPuzzleCount] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
-  const [level, setLevel] = useState('one');
+  const [level] = useState('one');
 
   //function to deal with pulling new words for the other levels
   const manageLevel = async(count) => {
@@ -58,43 +59,18 @@ function LevelOne() {
       clearInputs();
     } else {
       setIsRunning(false);
-      // let result = await fetch('http://localhost:5000/users',{
-      //   method: 'post',
-      //   body: JSON.stringify({username, id:Date.now()}),
-      //   headers:{'Content-Type': 'application/json'}
-      // })
-      // result = await result.json()
-      // if(result.success){
-      //     navigate('/menu');
-      // } else {
-      //     alert(result.msg);
-      // }
     }
   }
 
   const handleLevelComplete = async (level, time) => {
-    const user = localStorage.getItem('username'); // Assuming username is saved in localStorage
-    
-    const data = {
-      level: level,
-      time: time,
-      username: user,
-    };
 
     try {
-      const response = await fetch('http://localhost:5000/scores', {
+      const response = await fetch('http://localhost:5000/scores/LevelOne', {
         method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, time, level}),
       });
-
-      if (response.success) {
-        console.log('Level completion data saved successfully');
-      } else {
-        console.error('Failed to save level completion data');
-      }
+      console.log(response);
     } catch (error) {
       console.error('Error during request', error);
     }

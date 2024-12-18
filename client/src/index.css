@@ -580,7 +580,19 @@ header h1{
     gap: 30px 0px;
   }
   
-  .level {
+  .level-1 {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
+  .level-2 {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
+  .level-3 {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
+  .level-4 {
     flex: 1 1 calc(50% - 40px);
     max-width: calc(50% - 40px);
   }

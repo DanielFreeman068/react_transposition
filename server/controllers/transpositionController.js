@@ -42,15 +42,15 @@ const createUser = async(req, res) => {
 
 const createScore = async(req, res) => {
     try {
-        const { level, time, username } = req.body;
+        const { username, time, level } = req.body;
 
-        if (!level || !time || !username) {
-        return res.status(400).json({ error: 'Level, time, and username are required' });
+        if (!username || !time || !level) {
+            return res.status(400).json({ error: 'Level, time, and username are required' });
         }
     
         console.log('Level Completed:', level, 'Time:', time, 'User:', username);
     
-        let newScore = await Score.create({ username, level, time});
+        let newScore = await Score.create({ username, level, time });
     
         // Return success response
         res.status(201).json({
