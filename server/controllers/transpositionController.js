@@ -1,6 +1,17 @@
 const User = require("../models/User");
 const Score = require('../models/Score');
 
+const readAllScores = async (req, res) => {
+    try {
+        let scores = await Score.find({});
+        res.json({ success: true, data: scores });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+
 const createUser = async(req, res) => {
     try {
         // Destructure username and id from the request body
@@ -66,4 +77,4 @@ const createScore = async(req, res) => {
     }
 }
 
-module.exports = { createUser, createScore };
+module.exports = { createUser, createScore, readAllScores };
