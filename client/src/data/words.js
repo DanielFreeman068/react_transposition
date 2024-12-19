@@ -156,7 +156,7 @@ const words = {
     levelFour: [
         {
             originalText: "midfielder",
-            cipherText: "mfidl*ree",
+            cipherText: "dee*mflriid*",
             cipherKey: [3, 1, 2],
             hint: "A player who plays both defensive and attacking roles in the middle of the field."
         },

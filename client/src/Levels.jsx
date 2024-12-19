@@ -29,40 +29,74 @@ const Levels = () => {
             navigate('/LevelFour');
         }
     };
-    //hoook to get timer scores from local storage and update existing one if its a better
+    //hoook to get username from local storage and fetch score data
     useEffect(() => {
         const fetchScores = async () => {
             const currentUsername = localStorage.getItem('username');
             try {
-                const response = await fetch('http://localhost:5000/leaderboards');
+                const response = await fetch('http://localhost:5000/FirstLevelData');
                 if (response.ok) {
-                    const data = await response.json();
-                    const filteredScores = data.data.filter(score => score.username === currentUsername);
+                    const levelOneData = await response.json();
+                    const filteredScores = levelOneData.data.filter(score => score.username === currentUsername);
                     //updates level score depending on the level given from the fetched data
                     if (filteredScores.length > 0) {
-                        filteredScores.forEach(score => {
-                            switch (score.level) {
-                                case 'one':
-                                    setOneTime(parseInt(score.time));
-                                    break;
-                                case 'two':
-                                    setTwoTime(parseInt(score.time));
-                                    break;
-                                case 'three':
-                                    setThreeTime(parseInt(score.time));
-                                    break;
-                                case 'four':
-                                    setFourTime(parseInt(score.time));
-                                    break;
-                                default:
-                                    console.warn(`Unexpected level: ${score.level}`);
-                            }
-                        });
+                        setOneTime(parseInt(filteredScores[0].time));
                     } else {
                         console.log("No scores found for this username");
                         setOneTime(0);
+                    }
+                } else {
+                    throw new Error('Failed to fetch scores');
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+            try {
+                const response = await fetch('http://localhost:5000/SecondLevelData');
+                if (response.ok) {
+                    const levelTwoData = await response.json();
+                    const filteredScores = levelTwoData.data.filter(score => score.username === currentUsername);
+                    //updates level score depending on the level given from the fetched data
+                    if (filteredScores.length > 0) {
+                        setTwoTime(parseInt(filteredScores[0].time));
+                    } else {
+                        console.log("No scores found for this username");
                         setTwoTime(0);
+                    }
+                } else {
+                    throw new Error('Failed to fetch scores');
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+            try {
+                const response = await fetch('http://localhost:5000/ThirdLevelData');
+                if (response.ok) {
+                    const levelThreeData = await response.json();
+                    const filteredScores = levelThreeData.data.filter(score => score.username === currentUsername);
+                    //updates level score depending on the level given from the fetched data
+                    if (filteredScores.length > 0) {
+                        setThreeTime(parseInt(filteredScores[0].time));
+                    } else {
+                        console.log("No scores found for this username");
                         setThreeTime(0);
+                    }
+                } else {
+                    throw new Error('Failed to fetch scores');
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+            try {
+                const response = await fetch('http://localhost:5000/FourthLevelData');
+                if (response.ok) {
+                    const levelFourData = await response.json();
+                    const filteredScores = levelFourData.data.filter(score => score.username === currentUsername);
+                    //updates level score depending on the level given from the fetched data
+                    if (filteredScores.length > 0) {
+                        setFourTime(parseInt(filteredScores[0].time));
+                    } else {
+                        console.log("No scores found for this username");
                         setFourTime(0);
                     }
                 } else {
@@ -79,10 +113,6 @@ const Levels = () => {
             <a className="back-button" href="/menu">Back</a>
             <header>
                 <h1>Cipher League</h1>
-                <h3>{oneTime}</h3>
-                <h3>{twoTime}</h3>
-                <h3>{threeTime}</h3>
-                <h3>{fourTime}</h3>
             </header>
             {/* .map function displaying all levels */}
             <div className="level-container">

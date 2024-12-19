@@ -1,42 +1,48 @@
 import React, { useEffect, useState } from 'react';
 
 const Leaderboards = () => {
-    const [scores, setScores] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [levelOneScores, setLevelOneScores] = useState([]);
 
     useEffect(() => {
         const fetchScores = async () => {
             try {
-                const response = await fetch('http://localhost:5000/leaderboards');
+                const response = await fetch('http://localhost:5000/FirstLevelData');
                 if (response.ok) {
                     const data = await response.json();
-                    setScores(data.data);
-                    setLoading(false);
+                    const sortedScores = data.data.sort((a, b) => a.time - b.time);
+                    setLevelOneScores(sortedScores);
                 } else {
                     throw new Error('Failed to fetch scores');
                 }
             } catch (err) {
-                setError(err.message);
-                setLoading(false);
+                console.log(err);
             }
         };
         fetchScores();
     }, []);
-
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
     return (
         <>
+            <a className="back-button" href="/menu">Back</a>
             <div>
                 <h1>Leaderboard</h1>
-                <ul>
-                    {scores.map((item, index) => (
-                    <li key={index}>
-                        <span>{item.username}</span>: <span>{item.time}</span>: <span>{item.level}</span>
-                    </li>
-                    ))}
-                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {levelOneScores.slice(0, 10).map((item, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{item.username}</td>
+                                <td>{item.time}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </>
     )

@@ -15,6 +15,6 @@ const scoreSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-}, {collection: "scores"})
+}, {collection: "firstLevels"})
 
-module.exports = mongoose.model("Score", scoreSchema);
+module.exports = mongoose.model("FirstLevel", scoreSchema);
