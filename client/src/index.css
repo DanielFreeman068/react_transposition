@@ -16,7 +16,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: url('https://res.cloudinary.com/dehoobuso/image/upload/v1734309102/soccer-themed-bg_gslyxx.avif');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -547,6 +547,7 @@ header h1{
 
 .cipher-info p {
   font-size: 1.5rem;
+  color:white;
 }
 
 .guess-section {

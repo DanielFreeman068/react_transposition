@@ -3,7 +3,7 @@ const words = {
     levelOne: [
         {
             originalText: "tackle",
-            cipherText: "tca*kle",
+            cipherText: "al*ce*tk*",
             cipherKey: [2, 1, 3],
             hint: "An action where a player attempts to steal the ball from an opponent."
         },

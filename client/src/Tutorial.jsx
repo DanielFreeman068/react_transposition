@@ -34,6 +34,10 @@ const Tutorial = () => {
                             <span className="number">3</span>
                             <p>Hints are available however they do add 30 seconds to your final time so use cautiously.</p>
                         </div>
+                        <div className="list-item">
+                            <span className="number">4</span>
+                            <p>The * symbol represents a space.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -45,7 +49,8 @@ const Tutorial = () => {
                         <div className="example-content">
                             <p>Cipher Text: <span className="code">eo*hl*l**</span></p>
                             <p>Key: <span className="code">2, 1, 3</span></p>
-                            <p>Solution: Write the text in columns following the key sequence, then read row by row.</p>
+                            <p>Answer: <span className="code">hello</span></p>
+                            <p>Solution: Write the text in columns following the key sequence, then read row by row. If any * are at the end just leave them as whitespace</p>
                         </div>
                     </div>
                 </section>

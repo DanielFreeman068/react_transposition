@@ -162,11 +162,11 @@ function LevelOne() {
                 placeholder="Enter the original text"
                 className="guess-input"
               />
-              <button onClick={handleGuess} className="submit-button">Submit</button>
+              <button className='submit-button' onClick={()=>handleHint(prev => prev + 30000)}>Get Hint</button>
             </div>
           </div>
-          {/* hint button and feedback */}
-          <button className='hint' onClick={()=>handleHint(prev => prev + 30000)}>Get Hint</button>
+          {/* submit button and feedback */}
+          <button onClick={handleGuess} className="hint">Submit</button>
           {feedback && <p className="feedback">{feedback}</p>}
         </div>
       </div>
