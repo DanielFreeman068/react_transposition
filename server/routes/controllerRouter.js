@@ -7,7 +7,7 @@ router.get("/leaderboards", readAllScores);
 
 //.post methods
 router.post("/", createUser);
-router.post('/LevelOne', createOrUpdateScoreOne);
+router.post('/LevelOne', createOrUpdateScore);
 router.post('/LevelTwo', createOrUpdateScore);
 
 module.exports = router;

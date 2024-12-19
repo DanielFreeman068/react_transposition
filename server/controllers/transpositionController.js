@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const Score = require('../models/Score');
+const Score = require('../models/LevelOneScore');
 
 const readAllScores = async (req, res) => {
     try {
@@ -51,7 +51,7 @@ const createUser = async(req, res) => {
     }
 }
 //function for score creation
-const createOrUpdateScoreOne = async (req, res) => {
+const createOrUpdateScore = async (req, res) => {
     try {
         const { username, time, level } = req.body;
 
@@ -95,4 +95,4 @@ const createOrUpdateScoreOne = async (req, res) => {
 
 
 
-module.exports = { createUser, createOrUpdateScoreOne, readAllScores };
+module.exports = { createUser, createOrUpdateScore, readAllScores };
