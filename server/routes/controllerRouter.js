@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const {createUser, createScore, readAllScores} = require("../controllers/transpositionController");
+const {createUser, createOrUpdateScore, readAllScores} = require("../controllers/transpositionController");
 
-router.post("/", createUser);
+//.get methods
 router.get("/leaderboards", readAllScores);
-router.post('/LevelOne', createScore);
+
+//.post methods
+router.post("/", createUser);
+router.post('/LevelOne', createOrUpdateScoreOne);
+router.post('/LevelTwo', createOrUpdateScore);
 
 module.exports = router;

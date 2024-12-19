@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const Levels = () => {
-    const [oneTime, setOneTime] = useState(0);
+
+    const [oneTime, setOneTime] = useState([]);
     const [twoTime, setTwoTime] = useState(0);
     const [threeTime, setThreeTime] = useState(0);
     const [fourTime, setFourTime] = useState(0);
@@ -28,32 +29,51 @@ const Levels = () => {
             navigate('/LevelFour');
         }
     };
-//ASK MR BERNARD WHY THIS ISNT WORKING
     //hoook to get timer scores from local storage and update existing one if its a better
     useEffect(() => {
-        const savedOneTime = localStorage.getItem('oneTime');
-        const savedTwoTime = localStorage.getItem('twoTime');
-        const savedThreeTime = localStorage.getItem('threeTime');
-        const savedFourTime = localStorage.getItem('fourTime');
-        if (savedOneTime) {
-            setOneTime(parseFloat(savedOneTime));
-        }
-        // if (savedOneTime) {
-        //     const parsedTime = parseInt(savedOneTime);
-        //     const update = oneTime < parsedTime ? oneTime : parsedTime;
-        //     setOneTime(update);
-        // }
-        if (savedTwoTime) {
-            setTwoTime(parseFloat(savedTwoTime));
-        }
-        if (savedThreeTime) {
-            setThreeTime(parseFloat(savedThreeTime));
-        }
-        if (savedFourTime) {
-            setFourTime(parseFloat(savedFourTime));
-        }
-    }, [oneTime]);
-//HAVE SCORE ONLY BE UPDATED IF ITS HIGHER
+        const fetchScores = async () => {
+            const currentUsername = localStorage.getItem('username');
+            try {
+                const response = await fetch('http://localhost:5000/leaderboards');
+                if (response.ok) {
+                    const data = await response.json();
+                    const filteredScores = data.data.filter(score => score.username === currentUsername);
+                    //updates level score depending on the level given from the fetched data
+                    if (filteredScores.length > 0) {
+                        filteredScores.forEach(score => {
+                            switch (score.level) {
+                                case 'one':
+                                    setOneTime(parseInt(score.time));
+                                    break;
+                                case 'two':
+                                    setTwoTime(parseInt(score.time));
+                                    break;
+                                case 'three':
+                                    setThreeTime(parseInt(score.time));
+                                    break;
+                                case 'four':
+                                    setFourTime(parseInt(score.time));
+                                    break;
+                                default:
+                                    console.warn(`Unexpected level: ${score.level}`);
+                            }
+                        });
+                    } else {
+                        console.log("No scores found for this username");
+                        setOneTime(0);
+                        setTwoTime(0);
+                        setThreeTime(0);
+                        setFourTime(0);
+                    }
+                } else {
+                    throw new Error('Failed to fetch scores');
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        };
+        fetchScores();
+    }, []);    
     return (
         <>
             <a className="back-button" href="/menu">Back</a>

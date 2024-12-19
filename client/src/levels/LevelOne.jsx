@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Timer from '../components/Timer'
 import ProgressBar from '../components/Progress';
 import words from '../data/words'
@@ -32,6 +32,7 @@ function LevelOne() {
 
   const username = localStorage.getItem('username');
   const [score, setScore] = useState(0);
+  const [level, setLevel] = useState('one');
   const [hint, setHint] = useState(randomCipher.hint);
   const [key, setKey] = useState(randomCipher.cipherKey);
   const [originalText, setOriginalText] = useState(randomCipher.originalText);
@@ -44,7 +45,6 @@ function LevelOne() {
   const [hintTime, setHintTime] = useState(0);
   const [currentPuzzleCount, setCurrentPuzzleCount] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
-  const [level] = useState('one');
 
   //function to deal with pulling new words for the other levels
   const manageLevel = async(count) => {
@@ -62,29 +62,21 @@ function LevelOne() {
     }
   }
 
+  //function to handle the all three puzzles completing
   const handleLevelComplete = async (level, time) => {
-
     try {
-      const response = await fetch('http://localhost:5000/scores/LevelOne', {
+      const response = await fetch('http://localhost:5000/LevelOne', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username, time, level}),
       });
       console.log(response);
+      setLevel('one');
+      setScore(parseInt(time))
     } catch (error) {
       console.error('Error during request', error);
     }
   };
-
-
-
-//THIS DOES NOT WORK IT ALWAYS PULLS THE SCORE FROM BEFORE
-  useEffect(() => {
-      const savedTime = localStorage.getItem('oneTime');
-      if (savedTime) {
-          setScore(parseInt(savedTime));
-      }
-  }, []);
 
   // Check the user's guess
   const handleGuess = () => {
@@ -115,11 +107,13 @@ function LevelOne() {
       {/* end screen */}
       {!isRunning && (<div className='end-screen-container'>
         <h1>Level Completed!</h1>
-        <h3>{score}</h3>
         <div className="end-star-group">
-          <i id='end-star' className="fas fa-star"></i>
-          <i id='end-star' className="fas fa-star"></i>
-          <i id='end-star' className="fas fa-star"></i>
+        <i id='end-star' className={`fas fa-star 
+            ${score > 0 ? "gold" : ""}`}></i>
+        <i id='end-star' className={`fas fa-star 
+            ${score > 0 && score < 120000 ? "gold" : ""}`}></i>
+        <i id='end-star' className={`fas fa-star 
+            ${score > 0 && score < 60000 ? "gold" : ""}`}></i>
         </div>
         <a href="/levels" className="end-button">Finish</a>
       </div>)}

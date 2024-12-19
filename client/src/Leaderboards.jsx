@@ -8,7 +8,7 @@ const Leaderboards = () => {
     useEffect(() => {
         const fetchScores = async () => {
             try {
-                const response = await fetch('http://localhost:5000/scores/leaderboards');
+                const response = await fetch('http://localhost:5000/leaderboards');
                 if (response.ok) {
                     const data = await response.json();
                     setScores(data.data);

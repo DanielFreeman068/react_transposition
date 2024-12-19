@@ -30,6 +30,9 @@ function LevelTwo() {
 // Example: Pick a random word object
 let randomCipher = getRandomWord();
 
+const username = localStorage.getItem('username');
+const [score, setScore] = useState(0);
+const [level, setLevel] = useState('two');
 const [hint, setHint] = useState(randomCipher.hint)
 const [key, setKey] = useState(randomCipher.cipherKey);
 const [originalText, setOriginalText] = useState(randomCipher.originalText);
@@ -58,6 +61,22 @@ const manageLevel = (count) => {
     setIsRunning(false);
     }
 }
+
+    //function to handle the all three puzzles completing
+const handleLevelComplete = async (level, time) => {
+    try {
+    const response = await fetch('http://localhost:5000/LevelTwo', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, time, level}),
+    });
+    console.log(response);
+    setLevel('one');
+    setScore(parseInt(time))
+    } catch (error) {
+    console.error('Error during request', error);
+    }
+};
 
 // Check the user's guess
 const handleGuess = () => {
@@ -89,15 +108,18 @@ const handleGuess = () => {
         {!isRunning && (<div className='end-screen-container'>
             <h1>Level Completed!</h1>
             <div className="end-star-group">
-                <i id='end-star' className="fas fa-star"></i>
-                <i id='end-star' className="fas fa-star"></i>
-                <i id='end-star' className="fas fa-star"></i>
+            <i id='end-star' className={`fas fa-star 
+                ${score > 0 ? "gold" : ""}`}></i>
+            <i id='end-star' className={`fas fa-star 
+                ${score > 0 && score < 120000 ? "gold" : ""}`}></i>
+            <i id='end-star' className={`fas fa-star 
+                ${score > 0 && score < 60000 ? "gold" : ""}`}></i>
             </div>
             <a href="/levels" className="end-button">Finish</a>
         </div>)}
         {/* quit and timer component in top corners */}
         <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
-        <Timer isRunning={isRunning} addedTime={hintTime} level={'two'}/>
+        <Timer isRunning={isRunning} addedTime={hintTime} level={level} onLevelComplete={handleLevelComplete}/>
         {quitBox && (<div className='quit-container'>
             <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
             <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>

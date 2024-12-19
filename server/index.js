@@ -22,8 +22,7 @@ app.get('/',(req,res)=>{
 })
 
 //Routes
-app.use("/users", transpositionRoute);
-app.use("/scores", transpositionRoute);
+app.use("/", transpositionRoute);
 
 //run server
 const initServer = async() => {

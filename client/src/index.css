@@ -151,6 +151,15 @@ header h1{
   margin:1rem;
 }
 
+.end-star-group i {
+  color: black;
+  margin: 0 4px;
+}
+
+.end-star-group i.gold {
+  color: gold;
+}
+
 .end-button{
   position:absolute;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
