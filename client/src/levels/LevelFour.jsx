@@ -57,8 +57,9 @@ const manageLevel = (count) => {
     setKey(randomCipher.cipherKey);
     setHint(randomCipher.hint);
     clearInputs();
+    setUserGuess('');
     } else {
-    setIsRunning(false);
+        setIsRunning(false);
     }
 }
 
@@ -123,7 +124,7 @@ const handleGuess = () => {
         {quitBox && (<div className='quit-container'>
             <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
             <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
-            <a className="quit-button" href="/menu">Confirm</a>
+            <a className="quit-button" href="/levels">Confirm</a>
         </div>)}
         <div className="transposition-container">
             <header>
@@ -162,11 +163,11 @@ const handleGuess = () => {
                     placeholder="Enter the original text"
                     className="guess-input"
                 />
-                <button className='hint' onClick={()=>handleHint(prev => prev + 30000)}>Get Hint</button>
+                <button className='submit-button' onClick={()=>handleHint(prev => prev + 30000)}>Get Hint</button>
                 </div>
             </div>
             {/* submit button and feedback */}
-            <button onClick={handleGuess} className="submit-button">Submit</button>
+            <button onClick={handleGuess} className="hint">Submit</button>
             {feedback && <p className="feedback">{feedback}</p>}
             </div>
         </div>
