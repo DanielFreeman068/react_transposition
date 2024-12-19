@@ -72,7 +72,7 @@ function LevelOne() {
       });
       console.log(response);
       setLevel('one');
-      setScore(parseInt(time))
+      setScore(time)
     } catch (error) {
       console.error('Error during request', error);
     }

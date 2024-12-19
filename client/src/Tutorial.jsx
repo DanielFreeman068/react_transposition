@@ -1,7 +1,57 @@
 const Tutorial = () => {
     return (
-        <div>Tutorial</div>
-    )
-}
+        <div className="tutorial-container">
+            <a className="back-button" href="/menu">Back</a>
+            {/* Header Section */}
+            <header>
+                <h1>How To Play</h1>
+            </header>
 
-export default Tutorial
+            <div className="tutorial-content">
+                {/* Game Overview */}
+                <section className="tutorial-section">
+                    <h2>Game Overview</h2>
+                    <p>
+                        Welcome to the Cipher League! This game tests your ability to decode 
+                        scrambled words using transposition ciphers. You'll need to rearrange 
+                        letters according to given patterns to reveal the hidden words.
+                    </p>
+                </section>
+
+                {/* Game Rules */}
+                <section className="tutorial-section">
+                    <h2>Game Rules</h2>
+                    <div className="numbered-list">
+                        <div className="list-item">
+                            <span className="number">1</span>
+                            <p>Each puzzle presents a scrambled word (cipher text) and a key sequence.</p>
+                        </div>
+                        <div className="list-item">
+                            <span className="number">2</span>
+                            <p>Use the numbered columns to rearrange the letters according to the key sequence.</p>
+                        </div>
+                        <div className="list-item">
+                            <span className="number">3</span>
+                            <p>Hints are available however they do add 30 seconds to your final time so use cautiously.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* How to Solve */}
+                <section className="tutorial-section">
+                    <h2>How to Solve Ciphers</h2>
+                    <div className="example-box">
+                        <h3>Example:</h3>
+                        <div className="example-content">
+                            <p>Cipher Text: <span className="code">eo*hl*l**</span></p>
+                            <p>Key: <span className="code">2, 1, 3</span></p>
+                            <p>Solution: Write the text in columns following the key sequence, then read row by row.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    );
+};
+
+export default Tutorial;

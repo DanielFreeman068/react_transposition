@@ -268,6 +268,120 @@ header h1{
   border: 2px solid black;
 }
 
+/* leaderboard styling */
+.leaderboard-level-container {
+  margin-top:4rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px 10px;
+  flex-wrap: wrap;
+}
+
+.level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 calc(25% - 40px);
+  max-width: calc(25% - 40px);
+}
+
+.leaderboard-button {
+  background-color: #4DD456;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color .3s ease;
+  font-size: 2.5rem;
+  color:black;
+}
+
+.leaderboard-button:hover{
+  background-color: #45a049;
+}
+
+.leaderboard-button.selected {
+  border: 2px solid black;
+}
+
+.leaderboard-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 4rem auto 0 auto;
+  border-collapse: collapse;
+  background-color: #050505;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboard-table thead {
+  background-color: #CBE0DB;
+  color: rgb(0, 0, 0);
+}
+
+.leaderboard-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  font-family: monospace;
+}
+
+.leaderboard-table tbody tr {
+  border-bottom: 1px solid #414141;
+  background-color: #323232;
+  transition: background-color 0.2s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+  background-color: #555555;
+}
+
+.leaderboard-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-table td {
+  padding: 12px 15px;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+/* Rank column styling */
+.leaderboard-table td:first-child {
+  font-weight: 600;
+  color: #ffffff;
+  width: 80px;
+}
+
+/* Top 3 ranks special styling */
+.leaderboard-table tbody tr:nth-child(1) td:first-child {
+  color: gold;
+  font-size:20px;
+}
+
+.leaderboard-table tbody tr:nth-child(2) td:first-child {
+  color: silver;
+  font-size:19px;
+}
+
+.leaderboard-table tbody tr:nth-child(3) td:first-child {
+  color: #cd7f32;
+  font-size:18px;
+}
+
+/* Username column styling */
+.leaderboard-table td {
+  font-weight: 500;
+}
+
+
 /* level page styling */
 .level-container {
   margin-top:7rem;
@@ -347,6 +461,11 @@ header h1{
 
 .level-button.selected {
   border: 2px solid black;
+}
+
+.level-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .level-start {
@@ -524,7 +643,116 @@ header h1{
   transition: transform 0.3s ease-out;
 }
 
+/* tutorial styling */
+.tutorial-container {
+  min-height: 100vh;
+  /* min-width: 100vw;
+  padding: 2rem;
+  background-color: #323232; */
+}
 
+.tutorial-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.tutorial-header {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tutorial-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+  text-align: center;
+}
+
+.back-button {
+  color: #64748b;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #1e293b;
+}
+
+.tutorial-section {
+  margin-bottom: 2.5rem;
+}
+
+.tutorial-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.tutorial-section p {
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.numbered-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #dbeafe;
+  color: #1e40af;
+  border-radius: 50%;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.example-box {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.example-box h3 {
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.example-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.code {
+  font-family: monospace;
+  background-color: #f1f5f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
 
 
 
@@ -532,7 +760,7 @@ header h1{
 @media screen and (max-width: 768px) {
   body {
   background: url('./assets/soccer-themed-bg.avif');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
   }
 
@@ -607,5 +835,44 @@ header h1{
   .level-4 {
     flex: 1 1 calc(50% - 40px);
     max-width: calc(50% - 40px);
+  }
+
+  /* leaderboard styling */
+  .leaderboard-header h1{
+    font-size: 2rem;
+    max-width: 300px;
+    margin:5rem auto;
+  }
+
+  .leaderboard-level-container {
+    gap: 30px 0px;
+  }
+
+  .level {
+    flex: 1 1 calc(50% - 40px);
+    max-width: calc(50% - 40px);
+  }
+  .leaderboard-button {
+    padding: 18px 37px;
+    border-radius: 15px;
+  }
+
+  /* tutorial styling */
+  .tutorial-container {
+    padding: 1rem;
+  }
+
+  .tutorial-content {
+      padding: 1.5rem;
+  }
+
+  .tutorial-header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+  }
+
+  .tutorial-header h1 {
+      font-size: 1.75rem;
   }
 }

@@ -71,7 +71,7 @@ const manageLevel = (count) => {
             body: JSON.stringify({username, time, level}),
         });
         console.log(response);
-        setLevel('one');
+        setLevel('three');
         setScore(parseInt(time))
         } catch (error) {
         console.error('Error during request', error);

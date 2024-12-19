@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const Levels = () => {
-
+    const [levelsCompleted, setLevelsCompleted] = useState(0)
     const [oneTime, setOneTime] = useState([]);
     const [twoTime, setTwoTime] = useState(0);
     const [threeTime, setThreeTime] = useState(0);
@@ -41,6 +41,7 @@ const Levels = () => {
                     //updates level score depending on the level given from the fetched data
                     if (filteredScores.length > 0) {
                         setOneTime(parseInt(filteredScores[0].time));
+                        setLevelsCompleted(1);
                     } else {
                         console.log("No scores found for this username");
                         setOneTime(0);
@@ -59,6 +60,7 @@ const Levels = () => {
                     //updates level score depending on the level given from the fetched data
                     if (filteredScores.length > 0) {
                         setTwoTime(parseInt(filteredScores[0].time));
+                        setLevelsCompleted(2);
                     } else {
                         console.log("No scores found for this username");
                         setTwoTime(0);
@@ -77,6 +79,7 @@ const Levels = () => {
                     //updates level score depending on the level given from the fetched data
                     if (filteredScores.length > 0) {
                         setThreeTime(parseInt(filteredScores[0].time));
+                        setLevelsCompleted(3);
                     } else {
                         console.log("No scores found for this username");
                         setThreeTime(0);
@@ -95,6 +98,7 @@ const Levels = () => {
                     //updates level score depending on the level given from the fetched data
                     if (filteredScores.length > 0) {
                         setFourTime(parseInt(filteredScores[0].time));
+                        setLevelsCompleted(4);
                     } else {
                         console.log("No scores found for this username");
                         setFourTime(0);
@@ -117,7 +121,7 @@ const Levels = () => {
             {/* .map function displaying all levels */}
             <div className="level-container">
             {[1, 2, 3, 4].map((level, index) => (
-                <div key={index} className={`level-${index + 1} ${selectedLevel === index ? "" : ""}`} onClick={() => handleLevelClick(index)}>
+                <div key={index} className={`level-${index + 1} ${selectedLevel === index ? "" : ""}`}>
                     <div className="star-group">
                         <i className={`fas fa-star 
                             ${index === 0 && oneTime > 0 ? "gold" : ""} 
@@ -135,12 +139,16 @@ const Levels = () => {
                             ${index === 2 && threeTime > 0 && threeTime < 60000 ? "gold" : ""}
                             ${index === 3 && fourTime > 0 && fourTime < 60000 ? "gold" : ""}`}></i>
                     </div>
-                    <button className={`level-button ${selectedLevel === index ? "selected" : ""}
-                        ${index === 0 && oneTime > 0 ? "level-green" : ""}
-                        ${index === 1 && twoTime > 0 ? "level-green" : ""}
-                        ${index === 2 && threeTime > 0 ? "level-green" : ""}
-                        ${index === 3 && fourTime > 0 ? "level-green" : ""}`}
-                    >
+                    <button 
+                        className={`
+                            level-button 
+                            ${selectedLevel === index ? "selected" : ""}
+                            ${index === 0 && oneTime > 0 ? "level-green" : ""}
+                            ${index === 1 && twoTime > 0 ? "level-green" : ""}
+                            ${index === 2 && threeTime > 0 ? "level-green" : ""}
+                            ${index === 3 && fourTime > 0 ? "level-green" : ""}`}
+                            disabled={index > levelsCompleted}
+                            onClick={() => handleLevelClick(index)}>
                         {level}
                     </button>
                 </div>

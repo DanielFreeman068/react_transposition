@@ -71,7 +71,7 @@ const handleLevelComplete = async (level, time) => {
         body: JSON.stringify({username, time, level}),
     });
     console.log(response);
-    setLevel('one');
+    setLevel('two');
     setScore(parseInt(time))
     } catch (error) {
     console.error('Error during request', error);
