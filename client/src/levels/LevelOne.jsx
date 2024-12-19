@@ -5,6 +5,7 @@ import words from '../data/words'
 import { useNavigate } from 'react-router-dom';
 
 function LevelOne() {
+  const navigate = useNavigate();
   //level one word options
   const LevelWords = words.levelOne;
   //array helping with dupes
@@ -117,7 +118,7 @@ function LevelOne() {
         <i id='end-star' className={`fas fa-star 
             ${score > 0 && score < 60000 ? "gold" : ""}`}></i>
         </div>
-        <a href="/levels" className="end-button">Finish</a>
+        <a onClick={()=>navigate('/levels')} className="end-button">Finish</a>
       </div>)}
       {/* quit and timer component in top corners */}
       <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
@@ -125,7 +126,7 @@ function LevelOne() {
       {quitBox && (<div className='quit-container'>
         <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
         <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
-        <a className="quit-button" href="/levels">Confirm</a>
+        <a className="quit-button" onClick={()=>navigate('/levels')}>Confirm</a>
       </div>)}
       <div className="transposition-container">
         <header>

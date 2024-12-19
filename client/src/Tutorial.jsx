@@ -4,7 +4,7 @@ const Tutorial = () => {
     const navigate = useNavigate();
     return (
         <div className="tutorial-container">
-            <a className="back-button" href="/menu">Back</a>
+            <a className="back-button" onClick={()=>navigate('/menu')}>Back</a>
             {/* Header Section */}
             <header>
                 <h1>How To Play</h1>
