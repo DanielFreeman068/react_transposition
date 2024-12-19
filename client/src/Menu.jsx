@@ -4,15 +4,15 @@ const Menu = () => {
     const navigate = useNavigate();
     return (
         <>
-            <a className="back-button" href="/">Quit</a>
+            <button className="back-button" onClick={()=>navigate('/')}>Quit</button>
             <header>
                 <h1>Cipher League</h1>
             </header>
             <div className="menu-container">
                 {/* all menu options */}
-                <a className="menu-options" onClick={()=> navigate('/levels')}>Levels</a>
-                <a className="menu-options" onClick={()=> navigate('/tutorial')}>How To Play</a>
-                <a className="menu-options" onClick={()=> navigate('/leaderboards')}>Leaderboards</a>
+                <button className="menu-options" onClick={()=> navigate('/levels')}>Levels</button>
+                <button className="menu-options" onClick={()=> navigate('/tutorial')}>How To Play</button>
+                <button className="menu-options" onClick={()=> navigate('/leaderboards')}>Leaderboards</button>
             </div>
         </>
     )

@@ -114,7 +114,7 @@ const Levels = () => {
     }, []);    
     return (
         <>
-            <a className="back-button" onClick={()=>navigate('/menu')}>Back</a>
+            <button className="back-button" onClick={()=>navigate('/menu')}>Back</button>
             <header>
                 <h1>Cipher League</h1>
             </header>

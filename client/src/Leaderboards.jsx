@@ -84,7 +84,7 @@ const Leaderboards = () => {
     }, []);
     return (
         <>
-            <a className="back-button" onClick={()=>navigate('/menu')}>Back</a>
+            <button className="back-button" onClick={()=>navigate('/menu')}>Back</button>
             <header className='leaderboard-header'>
                 <h1>Level Leaderboards</h1>
             </header>

@@ -252,13 +252,12 @@ header h1{
   background-color: #BEBEBE;
   border: 2px solid transparent;
   text-align: center;
-  padding: 20px 100px;
-  text-decoration: none;
+  padding: 20px 50px;
   color:black;
   font-size: 1.5rem;
   border-radius: 10px;
   margin: 20px 0;
-  width: 200px;
+  width: 300px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
   transition: background-color 0.3s ease;
 }
@@ -808,9 +807,7 @@ header h1{
   }
 
   .menu-options {
-    padding: 15px 70px;
     font-size: 1.3rem;
-    width: 100px;
   }
 
   /* styling for level page */

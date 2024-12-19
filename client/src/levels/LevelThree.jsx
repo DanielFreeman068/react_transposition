@@ -118,7 +118,7 @@ const handleGuess = () => {
             <i id='end-star' className={`fas fa-star 
                 ${score > 0 && score < 60000 ? "gold" : ""}`}></i>
             </div>
-            <a onClick={()=>navigate('/levels')} className="end-button">Finish</a>
+            <button onClick={()=>navigate('/levels')} className="end-button">Finish</button>
         </div>)}
         {/* quit and timer component in top corners */}
         <button onClick={()=> setQuitBox(true)} className="back-button">Quit</button>
@@ -126,7 +126,7 @@ const handleGuess = () => {
         {quitBox && (<div className='quit-container'>
             <button className='x-button' onClick={()=> setQuitBox(false)}>x</button>
             <h1 className="quit-text">Are you sure you want to quit? All progress will be lost</h1>
-            <a className="quit-button" onClick={()=>navigate('/levels')}>Confirm</a>
+            <button className="quit-button" onClick={()=>navigate('/levels')}>Confirm</button>
         </div>)}
         <div className="transposition-container">
             <header>
