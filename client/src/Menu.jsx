@@ -1,4 +1,5 @@
 const Menu = () => {
+    const navigate = useNavigate();
     return (
         <>
             <a className="back-button" href="/">Quit</a>
