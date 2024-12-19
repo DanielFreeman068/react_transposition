@@ -1,6 +1,7 @@
 const Menu = () => {
     return (
         <>
+            <a className="back-button" href="/">Quit</a>
             <header>
                 <h1>Cipher League</h1>
             </header>
