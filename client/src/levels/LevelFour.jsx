@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import Timer from '../components/Timer'
 import ProgressBar from '../components/Progress';
 import words from '../data/words'
+import { useNavigate } from 'react-router-dom';
 
 function LevelFour() {
     //level one word options

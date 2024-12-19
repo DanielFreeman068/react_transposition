@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Leaderboards = () => {
+    const navigate = useNavigate();
     const [levelOneScores, setLevelOneScores] = useState([]);
     const [levelTwoScores, setLevelTwoScores] = useState([]);
     const [levelThreeScores, setLevelThreeScores] = useState([]);
