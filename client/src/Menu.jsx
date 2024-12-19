@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 const Menu = () => {
     const navigate = useNavigate();
     return (
@@ -8,9 +10,9 @@ const Menu = () => {
             </header>
             <div className="menu-container">
                 {/* all menu options */}
-                <a className="menu-options" href="/levels">Levels</a>
-                <a className="menu-options" href="/tutorial">How To Play</a>
-                <a className="menu-options" href="/leaderboards">Leaderboards</a>
+                <a className="menu-options" onClick={()=> navigate('/levels')}>Levels</a>
+                <a className="menu-options" onClick={()=> navigate('/tutorial')}>How To Play</a>
+                <a className="menu-options" onClick={()=> navigate('/leaderboards')}>Leaderboards</a>
             </div>
         </>
     )
