@@ -7,6 +7,17 @@ const transpositionRoute = require("./routes/controllerRouter");
 const connectDB = require("./db/connect");
 const port = 5000
 
+app.use((req,res,next) => {
+    const allowedOrigins = ['https://react-transposition-backend.onrender.com'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+})
+
 // Middleware
 app.use(morgan('tiny'))
 app.use(express.json())
