@@ -22,7 +22,6 @@ app.use((req,res,next) => {
 // Middleware
 app.use(morgan('tiny'))
 app.use(express.json())
-app.use(cors())
 
 
 //Body Parser
