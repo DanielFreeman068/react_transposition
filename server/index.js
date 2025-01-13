@@ -38,7 +38,7 @@ app.use("/", transpositionRoute);
 //run server
 const initServer = async() => {
     try {
-        await connectDB("mongodb+srv://mongo-template-user:TJGx0Jlpwr2qEqVX@task-manager-practice.ixadl.mongodb.net/Cipher-league?retryWrites=true&w=majority");
+        await connectDB("mongodb+srv://mongo-template-user:zCIqXOLxAVZXWLeI@task-manager-practice.ixadl.mongodb.net/Cipher-league?retryWrites=true&w=majority");
         app.listen(port, () => {
             console.log("Listening on port 5000");
         })
