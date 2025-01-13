@@ -34,7 +34,7 @@ const Levels = () => {
         const fetchScores = async () => {
             const currentUsername = localStorage.getItem('username');
             try {
-                const response = await fetch('http://localhost:5000/FirstLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/FirstLevelData');
                 if (response.ok) {
                     const levelOneData = await response.json();
                     const filteredScores = levelOneData.data.filter(score => score.username === currentUsername);
@@ -53,7 +53,7 @@ const Levels = () => {
                 alert(err.message);
             }
             try {
-                const response = await fetch('http://localhost:5000/SecondLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/SecondLevelData');
                 if (response.ok) {
                     const levelTwoData = await response.json();
                     const filteredScores = levelTwoData.data.filter(score => score.username === currentUsername);
@@ -72,7 +72,7 @@ const Levels = () => {
                 alert(err.message);
             }
             try {
-                const response = await fetch('http://localhost:5000/ThirdLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/ThirdLevelData');
                 if (response.ok) {
                     const levelThreeData = await response.json();
                     const filteredScores = levelThreeData.data.filter(score => score.username === currentUsername);
@@ -91,7 +91,7 @@ const Levels = () => {
                 alert(err.message);
             }
             try {
-                const response = await fetch('http://localhost:5000/FourthLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/FourthLevelData');
                 if (response.ok) {
                     const levelFourData = await response.json();
                     const filteredScores = levelFourData.data.filter(score => score.username === currentUsername);
