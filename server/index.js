@@ -7,19 +7,22 @@ const transpositionRoute = require("./routes/controllerRouter");
 const connectDB = require("./db/connect");
 const port = 5000
 
-<<<<<<< HEAD
-app.use(cors({
-    origin: 'https://react-transposition.onrender.com', // or an array of allowed origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  }));
+app.use((req,res,next) => {
+    const allowedOrigins = ['https://localhost:5000'];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+})
 
-=======
->>>>>>> parent of 28e7c2e (Update index.js)
 // Middleware
 app.use(morgan('tiny'))
 app.use(express.json())
+app.use(cors())
 
 
 //Body Parser
@@ -36,7 +39,7 @@ app.use("/", transpositionRoute);
 //run server
 const initServer = async() => {
     try {
-        await connectDB("mongodb+srv://mongo-template-user:zCIqXOLxAVZXWLeI@task-manager-practice.ixadl.mongodb.net/Cipher-league?retryWrites=true&w=majority");
+        await connectDB("mongodb+srv://Cipher-League:Rf6iwneOaY2lV03L@task-manager-practice.ixadl.mongodb.net/Cipher-league?retryWrites=true&w=majority");
         app.listen(port, () => {
             console.log("Listening on port 5000");
         })
