@@ -7,6 +7,7 @@ const transpositionRoute = require("./routes/controllerRouter");
 const connectDB = require("./db/connect");
 const port = 5000
 
+<<<<<<< HEAD
 app.use(cors({
     origin: 'https://react-transposition.onrender.com', // or an array of allowed origins
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
@@ -14,6 +15,8 @@ app.use(cors({
     credentials: true
   }));
 
+=======
+>>>>>>> parent of 28e7c2e (Update index.js)
 // Middleware
 app.use(morgan('tiny'))
 app.use(express.json())
