@@ -68,7 +68,7 @@ const manageLevel = (count) => {
     //function to handle the all three puzzles completing
 const handleLevelComplete = async (level, time) => {
     try {
-    const response = await fetch('http://localhost:5000/LevelTwo', {
+    const response = await fetch('https://react-transposition-backend.onrender.com/LevelTwo', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username, time, level}),
