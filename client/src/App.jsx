@@ -39,7 +39,7 @@ function App() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         if (validateUsername()) {
-            let result = await fetch('http://localhost:5000',{
+            let result = await fetch('https://react-transposition-backend.onrender.com/',{
                 method: 'post',
                 body: JSON.stringify({username, id:Date.now()}),
                 headers:{'Content-Type': 'application/json'}

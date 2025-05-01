@@ -32,7 +32,7 @@ const Leaderboards = () => {
     useEffect(() => {
         const fetchScores = async () => {
             try {
-                const response = await fetch('http://localhost:5000/FirstLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/FirstLevelData');
                 if (response.ok) {
                     const data = await response.json();
                     const sortedScores = data.data.sort((a, b) => a.time - b.time);
@@ -44,7 +44,7 @@ const Leaderboards = () => {
                 console.log(err);
             }
             try {
-                const response = await fetch('http://localhost:5000/SecondLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/SecondLevelData');
                 if (response.ok) {
                     const data = await response.json();
                     const sortedScores = data.data.sort((a, b) => a.time - b.time);
@@ -56,7 +56,7 @@ const Leaderboards = () => {
                 console.log(err);
             }
             try {
-                const response = await fetch('http://localhost:5000/ThirdLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/ThirdLevelData');
                 if (response.ok) {
                     const data = await response.json();
                     const sortedScores = data.data.sort((a, b) => a.time - b.time);
@@ -68,7 +68,7 @@ const Leaderboards = () => {
                 console.log(err);
             }
             try {
-                const response = await fetch('http://localhost:5000/FourthLevelData');
+                const response = await fetch('https://react-transposition-backend.onrender.com/FourthLevelData');
                 if (response.ok) {
                     const data = await response.json();
                     const sortedScores = data.data.sort((a, b) => a.time - b.time);
