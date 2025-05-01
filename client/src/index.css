@@ -308,7 +308,7 @@ header h1{
 .leaderboard-table {
   width: 100%;
   max-width: 800px;
-  margin: 4rem auto 0 auto;
+  margin: 4rem auto;
   border-collapse: collapse;
   background-color: #050505;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
