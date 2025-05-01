@@ -104,7 +104,7 @@ const Leaderboards = () => {
                         <tr>
                             <th>Rank</th>
                             <th>Username</th>
-                            <th>Time</th>
+                            <th>Time (Milliseconds)</th>
                         </tr>
                     </thead>
                     <tbody>
